@@ -1,141 +1,97 @@
-# 🧪 Auto Test Runner & Report Generator
+# 🧪 Test Reporter
 
-Фреймворк для автоматического запуска тестов и генерации HTML-отчётов с интеграцией Jira.
+[![npm version](https://badge.fury.io/js/test-reporter.svg)](https://badge.fury.io/js/test-reporter)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 🚀 Быстрый старт
+**Auto-discover, run tests, and generate beautiful HTML reports with Jira integration.**
 
-```bash
-# Запустить все тесты и открыть отчёт
-npm test
+## ✨ Features
 
-# Запустить с подробным выводом
-npm run test:verbose
-```
+- 🔍 **Auto-discovery** - Automatically finds Vitest/Jest/Mocha tests
+- 📊 **HTML Reports** - Beautiful, filterable test reports
+- 🎯 **Jira Integration** - Copy bug reports formatted for Jira
+- 🏷️ **Metadata** - Git info, Node version, platform details
+- ⚡ **Fast** - Client-side filtering in <10ms
+- 🎨 **Modern UI** - Gradients, shadows, responsive design
 
-## 📁 Структура проекта
-
-```
-project/
-├── framework/              # Фреймворк (автономный)
-│   ├── cli.js              # CLI entry point
-│   ├── test-runner.js      # Автозапуск тестов
-│   └── report-generator.js # Генератор отчётов
-├── example-tests/          # Примеры тестов
-│   └── formatMoney.test.js
-├── example-app/            # Пример веб-приложения
-│   ├── index.html
-│   ├── script.js
-│   └── style.css
-├── _test_report/           # Сгенерированные отчёты
-│   └── test-report.html
-├── test-report.html        # Standalone отчёт (корень)
-├── package.json
-└── README.md
-```
-
-## ✨ Возможности
-
-### 🔍 Авто-обнаружение тестов
-- **Vitest** (по умолчанию)
-- **Jest**
-- **Mocha**
-- Любые файлы по паттернам: `*.test.js`, `*.spec.js`, `tests/**/*.js`, `example-tests/**/*.js`
-
-### 📊 HTML-отчёт с фильтрами
-- **Текстовый поиск** по названию теста
-- **Фильтр по статусу** (Passed/Failed/Skipped)
-- Мгновенная фильтрация (<10ms)
-- Pie-диаграмма результатов
-- Метрики и статистика
-- Современный дизайн с градиентами и тенями
-
-### 🎯 Copy for Jira
-- Кнопка "Copy for Jira" для каждого упавшего теста
-- Форматирование в Markdown для Jira Cloud/Data Center
-- Включает: Environment, Preconditions, Steps to Reproduce, Expected/Actual Result, Stack Trace
-- Автоматическое извлечение input/expected/actual из ошибки
-- Визуальный фидбек с анимацией: "Copy" → "✅ Copied!" (2 сек) → "Copy"
-- Fallback для `file://` (alert + ручное копирование)
-- Без эмодзи в копируемом тексте
-
-### 🏷️ Метаданные окружения
-- Git branch
-- Git commit hash
-- Node.js версия
-- Платформа (OS)
-- Timestamp
-
-## 📝 Использование
-
-### CLI команды
+## 🚀 Quick Start
 
 ```bash
-node framework/cli.js           # Запустить тесты и отчёт
-node framework/cli.js --help    # Показать справку
-node framework/cli.js --verbose # Подробный вывод
+npx test-reporter
 ```
 
-### npm скрипты
+Or install globally:
 
 ```bash
-npm test           # Основной скрипт
-npm run test:verbose  # С подробным выводом
+npm install -g test-reporter
 ```
 
-## 🔧 Конфигурация
+Then run:
 
-### Паттерны поиска тестов
-
-В `framework/test-runner.js` можно изменить `config.testPatterns`:
-
-```javascript
-const config = {
-  testPatterns: [
-    '**/*.test.js',
-    '**/*.test.mjs',
-    '**/*.spec.js',
-    '**/*.spec.mjs',
-    '**/tests/**/*.js',
-    '**/tests/**/*.mjs',
-    '**/example-tests/**/*.js'
-  ],
-  excludePatterns: [
-    '**/node_modules/**',
-    '**/dist/**',
-    '**/build/**',
-    '**/.git/**',
-    '**/vendor/**'
-  ]
-};
+```bash
+test-reporter
 ```
 
-### Поддерживаемые фреймворки
+## 📦 Installation
 
-Фреймворк автоматически определяет установленный тест-раннер:
-
-```javascript
-const frameworks = {
-  vitest: {
-    detect: 'vitest',
-    command: 'npx vitest run --reporter=json --outputFile={output}'
-  },
-  jest: {
-    detect: 'jest',
-    command: 'npx jest --json --outputFile={output}'
-  },
-  mocha: {
-    detect: 'mocha',
-    command: 'npx mocha --reporter=json --reporter-option output={output}'
-  }
-};
+```bash
+npm install --save-dev test-reporter
 ```
 
-## 📋 Формат отчёта
+## 📖 Usage
 
-### Пример Jira Markdown
+### CLI Commands
+
+```bash
+test-reporter              # Run tests and open report
+test-reporter --verbose    # Verbose output
+test-reporter --watch      # Watch mode
+test-reporter -o ./report  # Custom output directory
+test-reporter --help       # Show help
+```
+
+### Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-h, --help` | Show help message | - |
+| `-v, --verbose` | Enable verbose output | `false` |
+| `-w, --watch` | Watch mode | `false` |
+| `-o, --output=<dir>` | Output directory | `_test_report` |
+| `--init` | Initialize config file | - |
+
+## 📁 Supported Test Patterns
+
+Auto-discovers test files:
+
+- `*.test.js`, `*.test.mjs`
+- `*.spec.js`, `*.spec.mjs`
+- `tests/**/*.js`, `tests/**/*.mjs`
+
+## 🛠️ Supported Frameworks
+
+Automatically detects and uses:
+
+- ✅ **Vitest** (default)
+- ✅ **Jest**
+- ✅ **Mocha**
+
+## 📊 Report Features
+
+### HTML Report
+
+- **Filter by Status** - Passed, Failed, Skipped
+- **Search** - Filter by test name
+- **Metrics** - Total, Passed, Failed counts
+- **Pie Chart** - Visual representation
+- **Duration** - Test execution time
+
+### Jira Bug Report
+
+Click "Copy for Jira" on failed tests to get:
 
 ```markdown
-# Test Failure: работает с нулём
+# Test Failure: test name
 
 ## Environment
 | Field | Value |
@@ -144,92 +100,122 @@ const frameworks = {
 | **Commit** | abc1234 |
 | **Node** | v25.9.0 |
 | **Platform** | linux |
-| **Timestamp** | 2026-04-26T21:14:21.637Z |
-| **Test File** | formatMoney.test.js |
-| **Duration** | 13.54ms |
 
 ## Preconditions
-- Function: `formatMoney`
-- Test case: `работает с нулём`
+- Function: `functionName`
+- Test case: `test description`
 
 ## Steps to Reproduce
-1. Open test file: `formatMoney.test.js`
-2. Find test: `работает с нулём`
-3. Pass input value: `0` to function `formatMoney`
-4. Execute: `formatMoney(0)`
+1. Open test file: `path/to/test.js`
+2. Find test: `test name`
+3. Pass input value: `value`
+4. Execute: `function(value)`
 5. Observe the result
 
 ## Expected Result
-Function should return: `$1.00`
+Function should return: `expected`
 
 ## Actual Result
-Function returned: `$0.00`
-
-## Error Details
-Assertion failed: `AssertionError: expected '$0.00' to be '$1.00' // Object.is equality`
+Function returned: `actual`
 
 ## Stack Trace
 ```
-AssertionError: expected '$0.00' to be '$1.00' // Object.is equality
-    at /home/went/VSCode/JSTrainee/example-tests/formatMoney.test.js:20:28
+
+## 📁 Project Structure
+
 ```
+project/
+├── node_modules/
+├── tests/
+│   └── *.test.js
+├── _test_report/
+│   └── test-report.html
+├── package.json
+└── test-reporter.config.js (optional)
 ```
 
-## 🧪 Пример теста
+## ⚙️ Configuration
+
+Create `test-reporter.config.js` in your project root:
 
 ```javascript
-// example-tests/formatMoney.test.js
+export default {
+  outputDir: './_test_report',
+  patterns: [
+    '**/*.test.js',
+    '**/*.spec.js'
+  ],
+  exclude: [
+    '**/node_modules/**',
+    '**/dist/**'
+  ]
+};
+```
+
+## 🧪 Example
+
+```javascript
+// tests/math.test.js
 import { describe, it, expect } from 'vitest';
 
-const formatMoney = (amount) => `$${amount.toFixed(2)}`;
+const add = (a, b) => a + b;
 
-describe('formatMoney', () => {
-  it('форматирует целое число', () => {
-    expect(formatMoney(10)).toBe('$10.00');
+describe('Math', () => {
+  it('adds two numbers', () => {
+    expect(add(2, 3)).toBe(5);
   });
-
-  it('работает с нулём', () => {
-    expect(formatMoney(0)).toBe('$0.00');
+  
+  it('handles zero', () => {
+    expect(add(0, 0)).toBe(0);
   });
 });
 ```
 
-## 🎯 Критерии приёмки
+Run:
 
-- ✅ Кнопка копирует валидный Markdown
-- ✅ Фильтры работают без перезагрузки
-- ✅ Отчёт весит <50KB (20KB)
-- ✅ Рендерится <200ms (~50ms)
-- ✅ Работает через `file://` и `http://`
-- ✅ Нулевые внешние зависимости в отчёте
-- ✅ Авто-обнаружение тест-фреймворка
-- ✅ Отчёт открывается в браузере автоматически
-- ✅ Улучшенная вёрстка с градиентами и тенями
+```bash
+test-reporter
+```
 
-## 📊 Производительность
+## 🎯 API
 
-| Метрика | Значение |
-|---------|----------|
-| Размер отчёта | ~20KB |
-| Время рендера | <50ms |
-| Время фильтрации | <10ms |
-| Время запуска | ~2s (включая тесты) |
+### Programmatic Usage
 
-## 🔐 Безопасность
+```javascript
+import { runTests, generateReport } from 'test-reporter';
 
-- Экранирование HTML в отчётах (XSS защита)
-- Экранирование Markdown спецсимволов
-- Нет внешних зависимостей в отчёте
-- Работает офлайн
+await runTests();
+await generateReport();
+```
 
-## 📝 Changelog
+## 📈 Performance
 
-### v1.1.0
-- ✅ Улучшена вёрстка отчёта (градиенты, тени, border-radius)
-- ✅ Файл отчёта переименован в `test-report.html`
-- ✅ Разделение фреймворка и тестов по разным директориям
-- ✅ Автоматическое извлечение input/expected/actual из ошибки
-- ✅ Убраны эмодзи из копируемого Markdown
-- ✅ Улучшена структура Steps to Reproduce
+| Metric | Value |
+|--------|-------|
+| Report Size | ~20KB |
+| Render Time | <50ms |
+| Filter Time | <10ms |
+| Total Launch | ~2s |
 
-### v1
+## 🔒 Security
+
+- No external dependencies in reports
+- XSS protection via HTML escaping
+- Works offline
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## 🙏 Acknowledgments
+
+- Built with [Vitest](https://vitest.dev/)
+- Inspired by Jest and Mocha reporters

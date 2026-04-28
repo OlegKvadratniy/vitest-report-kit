@@ -1,14 +1,16 @@
 {
-  "name": "js-trainee-test-framework",
+  "name": "test-reporter",
   "version": "1.0.0",
-  "description": "Auto test runner with Jira integration and HTML reports",
+  "description": "Auto-discover, run tests, and generate beautiful HTML reports with Jira integration",
   "type": "module",
+  "bin": {
+    "test-reporter": "./bin/test-reporter.js"
+  },
+  "main": "src/index.js",
   "scripts": {
-    "test": "node framework/cli.js",
-    "test:verbose": "node framework/cli.js --verbose",
-    "test:watch": "node framework/cli.js --watch",
-    "report": "node framework/cli.js",
-    "report:open": "node framework/cli.js && open _test_report/index.html"
+    "test": "node bin/cli.js",
+    "test:verbose": "node bin/cli.js --verbose",
+    "test:watch": "node bin/cli.js --watch"
   },
   "keywords": [
     "testing",
@@ -16,13 +18,23 @@
     "vitest",
     "jest",
     "mocha",
+    "reporter",
     "html-report",
-    "jira"
+    "jira",
+    "ci-cd"
   ],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "glob": "^10.5.0",
-    "vitest": "^4.1.5"
+    "open": "^10.1.0"
+  },
+  "peerDependencies": {
+    "vitest": ">=1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vitest": {
+      "optional": true
+    }
   }
 }
