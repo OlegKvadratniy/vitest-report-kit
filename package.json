@@ -1,0 +1,28 @@
+{
+  "name": "js-trainee-test-framework",
+  "version": "1.0.0",
+  "description": "Auto test runner with Jira integration and HTML reports",
+  "type": "module",
+  "scripts": {
+    "test": "node framework/cli.js",
+    "test:verbose": "node framework/cli.js --verbose",
+    "test:watch": "node framework/cli.js --watch",
+    "report": "node framework/cli.js",
+    "report:open": "node framework/cli.js && open _test_report/index.html"
+  },
+  "keywords": [
+    "testing",
+    "test-runner",
+    "vitest",
+    "jest",
+    "mocha",
+    "html-report",
+    "jira"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "glob": "^10.5.0",
+    "vitest": "^4.1.5"
+  }
+}
