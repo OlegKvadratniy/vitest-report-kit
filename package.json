@@ -4,7 +4,7 @@
   "description": "Auto-discover, run tests, and generate beautiful HTML reports with Jira integration",
   "type": "module",
   "bin": {
-    "test-reporter": "./bin/cli.js"
+    "test-reporter": "bin/cli.js"
   },
   "main": "src/index.js",
   "scripts": {
