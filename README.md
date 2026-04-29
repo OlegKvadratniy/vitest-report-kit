@@ -7,7 +7,7 @@
 
 ## ✨ Features
 
-- 🔍 **Auto-discovery** - Automatically finds Vitest/Jest/Mocha tests
+- 🔍 **Auto-discovery** - Automatically finds Vitest tests
 - 📊 **HTML Reports** - Beautiful, filterable test reports
 - 🎯 **Jira Integration** - Copy bug reports formatted for Jira
 - 🏷️ **Metadata** - Git info, Node version, platform details
@@ -45,8 +45,9 @@ npm install --save-dev test-reporter
 ```bash
 test-reporter              # Run tests and open report
 test-reporter --verbose    # Verbose output
-test-reporter --watch      # Watch mode
+test-reporter --watch      # Watch mode (not implemented)
 test-reporter -o ./report  # Custom output directory
+test-reporter --init       # Initialize config (prints message only)
 test-reporter --help       # Show help
 ```
 
@@ -56,9 +57,9 @@ test-reporter --help       # Show help
 |--------|-------------|---------|
 | `-h, --help` | Show help message | - |
 | `-v, --verbose` | Enable verbose output | `false` |
-| `-w, --watch` | Watch mode | `false` |
+| `-w, --watch` | Watch mode (not implemented) | `false` |
 | `-o, --output=<dir>` | Output directory | `_test_report` |
-| `--init` | Initialize config file | - |
+| `--init` | Initialize config (prints message only) | - |
 
 ## 📁 Supported Test Patterns
 
@@ -66,15 +67,13 @@ Auto-discovers test files:
 
 - `*.test.js`, `*.test.mjs`
 - `*.spec.js`, `*.spec.mjs`
-- `tests/**/*.js`, `tests/**/*.mjs`
+- `example-tests/**/*.js`, `example-tests/**/*.mjs`
 
 ## 🛠️ Supported Frameworks
 
 Automatically detects and uses:
 
 - ✅ **Vitest** (default)
-- ✅ **Jest**
-- ✅ **Mocha**
 
 ## 📊 Report Features
 
@@ -118,44 +117,13 @@ Function should return: `expected`
 ## Actual Result
 Function returned: `actual`
 
-## Stack Trace
-```
-
-## 📁 Project Structure
-
-```
-project/
-├── node_modules/
-├── tests/
-│   └── *.test.js
-├── _test_report/
-│   └── test-report.html
-├── package.json
-└── test-reporter.config.js (optional)
-```
-
-## ⚙️ Configuration
-
-Create `test-reporter.config.js` in your project root:
-
-```javascript
-export default {
-  outputDir: './_test_report',
-  patterns: [
-    '**/*.test.js',
-    '**/*.spec.js'
-  ],
-  exclude: [
-    '**/node_modules/**',
-    '**/dist/**'
-  ]
-};
-```
+## Error Details
+Assertion failed: `AssertionError: expected 'actual' to be 'expected'`
 
 ## 🧪 Example
 
 ```javascript
-// tests/math.test.js
+// example-tests/math.test.js
 import { describe, it, expect } from 'vitest';
 
 const add = (a, b) => a + b;
@@ -177,17 +145,6 @@ Run:
 test-reporter
 ```
 
-## 🎯 API
-
-### Programmatic Usage
-
-```javascript
-import { runTests, generateReport } from 'test-reporter';
-
-await runTests();
-await generateReport();
-```
-
 ## 📈 Performance
 
 | Metric | Value |
@@ -204,4 +161,3 @@ MIT License - see [LICENSE](LICENSE) for details.
 ## 🙏 Acknowledgments
 
 - Built with [Vitest](https://vitest.dev/)
-- Inspired by Jest and Mocha reporters
